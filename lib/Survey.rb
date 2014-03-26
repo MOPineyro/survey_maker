@@ -1,4 +1,4 @@
 class Survey < ActiveRecord::Base
   has_many :questions
-  has_many_and_belongs_to :surveytakers
+  has_and_belongs_to_many :surveytakers
 end

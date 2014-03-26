@@ -1,4 +1,4 @@
 class SurveyTaker < ActiveRecord::Base
-  has_many_and_belongs_to :survey
+  has_and_belongs_to_many :surveys
   has_many :surveysubmissions
 end
