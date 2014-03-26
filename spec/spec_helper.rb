@@ -1,13 +1,22 @@
-require 'activerecord'
+require 'active_record'
 require 'rspec'
+require 'pg'
 require 'shoulda-matchers'
 
-ActiveRecord::Base.establish_connection(YAML::load(File.open('./db/config.yml')))["test"]
+require 'survey'
+require 'question'
+require 'choice'
+require 'selection'
 
-describe 'This' do
-  it { should do some stuff }
+database_configurations = YAML::load(File.open('./db/config.yml'))
+development_configuration = database_configurations['test']
+ActiveRecord::Base.establish_connection(development_configuration)
 
-  it 'should do stuff' do
-    somestuff.should eq this_other_stuff
+RSpec.configure do |configure|
+  configure.after(:each) do
+    Survey.all.each{ |survey| survey.destroy }
+    Question.all.each{ |question| question.destroy }
+    Choice.all.each{ |choice| choice.destroy }
+    Selection.all.each{ |selection| selection.destroy }
   end
 end
