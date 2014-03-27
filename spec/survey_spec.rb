@@ -2,7 +2,7 @@ require 'spec_helper'
 
 describe Survey do
   it { should have_many :questions }
-  it { should have_and_belongs_to :surveytakers }
+  it { should have_and_belong_to_many :survey_takers }
 
   it 'should have questions' do
     test_survey = Survey.create({:name => 'What astral sign are you?'})
